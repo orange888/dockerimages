@@ -1,0 +1,31 @@
+version: '3.7'
+
+x-common-variables: &common-variables
+  TERM: "xterm"
+  TZ: "Europe/Brussels"
+  PGID: "100"
+  PUID: "1027"
+
+services:
+  gazee:
+    image: linuxserver/gazee:latest
+    restart: unless-stopped
+    ports:
+      - 4242:4242/tcp
+    environment:
+      <<: *common-variables
+    hostname: liofal.synology.me
+    volumes:
+      - /volume1/docker/gazee/config:/config
+    logging:
+      driver: syslog
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    networks:
+      gazee:
+  
+  
+networks:
+  gazee:

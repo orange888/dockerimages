@@ -1,0 +1,82 @@
+version: '3.7'
+
+x-common-variables: &common-variables
+  TERM: "xterm"
+  TZ: "Europe/Brussels"
+  PGID: "100"
+  PUID: "1027"
+
+services:
+  jackett:
+    image: linuxserver/jackett:latest
+    restart: unless-stopped
+    ports:
+      - 9118:9117/tcp
+    environment:
+      <<: *common-variables
+    hostname: liofal.synology.me
+    volumes:
+      - /volume1/docker/jackett/config:/config
+      - /volume1/incoming:/downloads
+    logging:
+      driver: syslog
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    networks:
+      sonarr:
+  
+  transmission:
+    image: linuxserver/transmission:latest
+    restart: unless-stopped
+    ports:
+      - 9092:9091/tcp
+      - 51414:51414/tcp
+    environment:
+      <<: *common-variables
+    hostname: liofal.synology.me
+    volumes:
+      - /volume1/docker/transmission/config3:/config
+      - /volume1/sonarr:/downloads
+      - /volume1/incoming:/watch
+    logging:
+      driver: syslog
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    depends_on: 
+      - jackett
+    links: 
+      - jackett
+    networks:
+      sonarr:
+  
+  sonarr:
+    image: linuxserver/sonarr:latest
+    restart: unless-stopped
+    ports:
+      - 8989:8989/tcp
+    environment:
+      <<: *common-variables
+    hostname: liofal.synology.me
+    volumes:
+      - /volume1/docker/sonarr/config:/config
+      - /volume1/sonarr:/downloads
+      - /volume1/tvshows:/tv
+    logging:
+      driver: syslog
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    depends_on: 
+      - transmission
+    links: 
+      - transmission
+    networks:
+      sonarr:
+
+networks:
+  sonarr:

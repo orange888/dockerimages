@@ -1,0 +1,31 @@
+version: '3.7'
+
+x-common-variables: &common-variables
+  TERM: "xterm"
+  TZ: "Europe/Brussels"
+  PGID: "100"
+  PUID: "1027"
+
+services:
+  lidarr:
+    image: linuxserver/lidarr:latest
+    restart: unless-stopped
+    ports:
+      - 8686:8686/tcp
+    environment:
+      <<: *common-variables
+    hostname: liofal.synology.me
+    volumes:
+      - /volume1/docker/gazee/config:/config
+    logging:
+      driver: syslog
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    networks:
+      lidarr:
+  
+  
+networks:
+  lidarr:
