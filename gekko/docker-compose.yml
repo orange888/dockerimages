@@ -1,20 +1,10 @@
 version: '3.7'
-
-x-common-variables: &common-variables
-  TERM: "xterm"
-  TZ: "Europe/Brussels"
-  PGID: "100"
-  PUID: "1027"
-
 services:
   gekko:
     image: liofal/gekko:latest
     restart: unless-stopped
     ports:
       - 3000:3000/tcp
-    environment:
-      <<: *common-variables
-    hostname: liofal.synology.me
     volumes:
       - history:/usr/src/app/history
       - ./config.js:/usr/src/app/config.js:ro
@@ -23,8 +13,12 @@ services:
       - redis
     depends_on: 
       - redis
+    env_file: 
+      - .env
+      - ../global.env
+    hostname: gekko
     logging:
-      driver: syslog
+      driver: json-file
     deploy:
       resources:
         limits:
@@ -34,8 +28,19 @@ services:
 
   redis:
     image: redis:latest
+    restart: unless-stopped
     volumes:
       - data:/data
+    env_file: 
+      - .env
+      - ../global.env
+    hostname: gekko
+    logging:
+      driver: json-file
+    deploy:
+      resources:
+        limits:
+          memory: 128M
     networks:
       gekko:
 
