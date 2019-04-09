@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+  bazarr:
+    image: linuxserver/bazarr:latest
+    restart: unless-stopped
+    ports:
+      - 6767:6767/tcp
+    env_file: 
+        - .env
+        - ../global.env    
+    hostname: liofal.synology.me
+    volumes:
+      - /volume1/docker/bazarr/config:/config
+      - /volume1/movies:/movies:ro
+      - /volume1/tvshows:/tv:ro
+    logging:
+      driver: json-file
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    networks:
+      bazarr:
+  
+networks:
+  bazarr:
