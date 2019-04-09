@@ -17,9 +17,5 @@ services:
       driver: json-file
     command:
       -timer=$${timer} -user=$${user} -quality=$${quality} -clientid=$${clientid}
-    secrets:
-      - password
-secrets:
-  password: 
   
 
