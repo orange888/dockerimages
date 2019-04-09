@@ -24,6 +24,7 @@ services:
       - /volume1/docker/plex/transcode:/transcode
       - /volume1/tvshows:/data/tvshows
       - /volume1/movies:/data/movies
+      - /volume1/twitch:/data/twitch 
     logging:
       driver: json-file
     deploy:
