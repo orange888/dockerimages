@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+ streamlink:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        buildno: 1  
+    volumes:
+    - /download
+    env_file: 
+        - .env
+        - ../global.env    
+    logging:
+      driver: json-file
+
