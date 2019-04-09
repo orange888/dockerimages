@@ -18,7 +18,7 @@ services:
     volumes:
       - /volume1/docker/gazee/config:/config
     logging:
-      driver: syslog
+      driver: json-file
     deploy:
       resources:
         limits:

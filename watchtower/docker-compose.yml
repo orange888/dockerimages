@@ -3,10 +3,8 @@ services:
   watchtower:
     image: v2tec/watchtower
     restart: unless-stopped
-    logging:
-      driver: syslog
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     command: --interval 30
     logging:
-      driver: syslog
+      driver: json-file

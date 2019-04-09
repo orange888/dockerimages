@@ -1,13 +1,5 @@
 version: '3.7'
 
-x-common-variables: &common-variables
-  TERM: "xterm"
-  TZ: "Europe/Brussels"
-  PLEX_CLAIM: "claim-6ZPrfseEvhBkspCDbZtG"
-  ADVERTISE_IP: "http://liofal.synology.me:32400/"
-  CHANGE_CONFIG_DIR_OWNERSHIP: "true"
-  PLEX_UID: "1027"
-
 services:
   plex:
     container_name: plex
@@ -23,8 +15,9 @@ services:
       - 32412:32412/udp
       - 32413:32413/udp
       - 32414:32414/udp
-    environment:
-      <<: *common-variables
+    env_file: 
+        - .env
+        - ../global.env    
     hostname: liofal.synology.me
     volumes:
       - /volume1/docker/plex/config:/config
@@ -32,7 +25,7 @@ services:
       - /volume1/tvshows:/data/tvshows
       - /volume1/movies:/data/movies
     logging:
-      driver: syslog
+      driver: json-file
     deploy:
       resources:
         limits:

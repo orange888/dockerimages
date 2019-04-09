@@ -14,7 +14,7 @@ services:
       placement:
         constraints: [node.platform.os == linux]
     logging:
-      driver: syslog
+      driver: json-file
 
   portainer:
     image: portainer/portainer
@@ -31,7 +31,7 @@ services:
       placement:
         constraints: [node.role == manager]
     logging:
-      driver: syslog
+      driver: json-file
 
 networks:
   agent_network:
