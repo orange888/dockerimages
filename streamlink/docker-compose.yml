@@ -1,21 +1,204 @@
 version: '3.7'
 
 services:
- naniwasc2:
+ starcraft:
     image: liofal/streamlink  
     build:
       context: .
       dockerfile: Dockerfile
     volumes:
-    - /volume1/docker/streamlink/download:/download
+    - /volume1/twitch:/download
     environment:
-      - user=naniwasc2
+      - user=starcraft
     env_file: 
         - .env
         - ../global.env    
     logging:
       driver: json-file
-    command:
-      -timer=$${timer} -user=$${user} -quality=$${quality} -clientid=$${clientid}
+    restart: on-failure 
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+  
+ sc2soo:
+    image: liofal/streamlink  
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+    - /volume1/twitch:/download
+    environment:
+      - user=sc2soo
+    env_file: 
+        - .env
+        - ../global.env    
+    logging:
+      driver: json-file
+    restart: on-failure
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+ 
+ sc2creator:
+    image: liofal/streamlink  
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+    - /volume1/twitch:/download
+    environment:
+      - user=sc2creator
+    env_file: 
+        - .env
+        - ../global.env    
+    logging:
+      driver: json-file
+    restart: on-failure
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+  
+ serral:
+    image: liofal/streamlink  
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+    - /volume1/twitch:/download
+    environment:
+      - user=serral
+    env_file: 
+        - .env
+        - ../global.env    
+    logging:
+      driver: json-file
+    restart: on-failure
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+
+ reynor2002:
+    image: liofal/streamlink  
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+    - /volume1/twitch:/download
+    environment:
+      - user=reynor2002
+    env_file: 
+        - .env
+        - ../global.env    
+    logging:
+      driver: json-file
+    restart: on-failure
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+
+ sc2tyty:
+    image: liofal/streamlink  
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+    - /volume1/twitch:/download
+    environment:
+      - user=sc2tyty
+    env_file: 
+        - .env
+        - ../global.env    
+    logging:
+      driver: json-file
+    restart: on-failure
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+ 
+ innovation_s2:
+    image: liofal/streamlink  
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+    - /volume1/twitch:/download
+    environment:
+      - user=innovation_s2
+    env_file: 
+        - .env
+        - ../global.env    
+    logging:
+      driver: json-file
+    restart: on-failure
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+  
+ gumiho:
+    image: liofal/streamlink  
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+    - /volume1/twitch:/download
+    environment:
+      - user=gumiho
+    env_file: 
+        - .env
+        - ../global.env    
+    logging:
+      driver: json-file
+    restart: on-failure
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+  
+ gostephano:
+    image: liofal/streamlink  
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+    - /volume1/twitch:/download
+    environment:
+      - user=gostephano
+    env_file: 
+        - .env
+        - ../global.env    
+    logging:
+      driver: json-file
+    restart: on-failure
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+  
+ demuslim:
+    image: liofal/streamlink  
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+    - /volume1/twitch:/download
+    environment:
+      - user=demuslim
+    env_file: 
+        - .env
+        - ../global.env    
+    logging:
+      driver: json-file
+    restart: on-failure
+    deploy:
+      resources:
+        limits:
+          memory: 128M
   
 
