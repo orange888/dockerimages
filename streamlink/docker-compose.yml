@@ -1,17 +1,25 @@
 version: '3.7'
 
 services:
- streamlink:
+ naniwasc2:
+    image: liofal/streamlink  
     build:
       context: .
       dockerfile: Dockerfile
-      args:
-        buildno: 1  
     volumes:
-    - /download
+    - /volume1/docker/streamlink/download:/download
+    environment:
+      - user=naniwasc2
     env_file: 
         - .env
         - ../global.env    
     logging:
       driver: json-file
+    command:
+      -timer=$${timer} -user=$${user} -quality=$${quality} -clientid=$${clientid}
+    secrets:
+      - password
+secrets:
+  password: 
+  
 

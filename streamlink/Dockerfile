@@ -1,8 +1,6 @@
 FROM python
 
-RUN pip install --upgrade --user streamlink
-RUN pip install ffmpeg
-	
+RUN pip install --upgrade streamlink progressbar33 google-api-python-client oauth2client
 ADD streamlink-recorder.py /
 
-CMD python ./streamlink-recorder.py ${streamLink} ${streamQuality} ${streamName} ${streamOptions}
+ENTRYPOINT python ./streamlink-recorder.py -timer=${timer} -user=${user} -quality=${quality} -clientid=${clientid}
