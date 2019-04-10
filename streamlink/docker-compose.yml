@@ -1,26 +1,28 @@
 version: '3.7'
 
 services:
- starcraft:
+ 
+ sc2_zest:
     image: liofal/streamlink  
     build:
       context: .
       dockerfile: Dockerfile
     volumes:
     - /volume1/twitch:/download
+    - ./streamlink-recorder.py:/streamlink-recorder.py
     environment:
-      - user=starcraft
+      - user=sc2_zest
     env_file: 
         - .env
         - ../global.env    
     logging:
       driver: json-file
-    restart: on-failure 
+    restart: on-failure
     deploy:
       resources:
         limits:
           memory: 128M
-  
+
  sc2soo:
     image: liofal/streamlink  
     build:
@@ -180,25 +182,4 @@ services:
       resources:
         limits:
           memory: 128M
-  
- demuslim:
-    image: liofal/streamlink  
-    build:
-      context: .
-      dockerfile: Dockerfile
-    volumes:
-    - /volume1/twitch:/download
-    environment:
-      - user=demuslim
-    env_file: 
-        - .env
-        - ../global.env    
-    logging:
-      driver: json-file
-    restart: on-failure
-    deploy:
-      resources:
-        limits:
-          memory: 128M
-  
-
+ 
