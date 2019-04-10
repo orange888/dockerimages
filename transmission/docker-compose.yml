@@ -1,39 +1,30 @@
-version: '2'
-services:
- transmission:
-  image: haugene/transmission-openvpn
-  cap_add:
-    - NET_ADMIN
-  devices:
-    - /dev/net/tun
-  restart: always
-  ports:
-    - "9091:9091"
-    - "8888:8888"
-  dns:
-    - 8.8.8.8
-    - 8.8.4.4
-  volumes:
-    - /etc/localtime:/etc/localtime:ro
-    - /your/storage/path/:/data
-  environment:
-    - OPENVPN_PROVIDER=PIA
-    - OPENVPN_USERNAME=username
-    - OPENVPN_PASSWORD=password
-    - OPENVPN_OPTS=--inactive 3600 --ping 10 --ping-exit 60
-    - LOCAL_NETWORK=192.168.0.0/24
- proxy:
-  image: haugene/transmission-openvpn-proxy
-  links:
-    - transmission
-  ports:
-    - 8080:8080
-  volumes:
-    - /etc/localtime:/etc/localtime:ro
+version: '3.7'
 
- rss:
-  image: haugene/transmission-rss
-  links:
-    - transmission
-  environment:
-    - RSS_URL=http://.../xxxxx.rss
+services:
+  transmission:
+    image: linuxserver/transmission:latest
+    restart: unless-stopped
+    ports:
+      - 9091:9091/tcp
+      - 51413:51413/tcp
+    env_file: 
+        - .env
+        - ../global.env    
+    hostname: liofal.synology.me
+    volumes:
+      - /volume1/docker/transmission/config2:/config
+      - /volume1/radarr:/downloads/complete/radarr
+      - /volume1/sonarr:/downloads/complete/sonarr
+      - /volume1/incoming:/watch
+    logging:
+      driver: json-file
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    networks:
+      transmission:
+  
+networks:
+  transmission:
+    name: transmission  
