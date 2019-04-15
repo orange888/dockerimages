@@ -21,10 +21,13 @@ services:
         limits:
           memory: 128M
     networks:
+      radarr:
       jackett:
       transmission:
   
 networks:
+  radarr:
+    name: radarr
   jackett:
     external: 
       name: jackett

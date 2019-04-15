@@ -11,8 +11,10 @@ services:
         - ../global.env    
     hostname: liofal.synology.me
     volumes:
-      - /volume1/docker/bazarr/config:/config
-      - /volume1/movies:/movies:ro
+      - /volume1/docker/bazarr/config:/config/config
+      - /volume1/docker/bazarr/db:/config/db
+      - /volume1/docker/bazarr/log:/config/log
+      - /volume1/movies:/movies
       - /volume1/tvshows:/tv:ro
     logging:
       driver: json-file
@@ -21,7 +23,13 @@ services:
         limits:
           memory: 128M
     networks:
-      bazarr:
+      radarr:
+      sonarr:
   
 networks:
-  bazarr:
+  sonarr:
+    external: 
+      name: sonarr
+  radarr:
+    external: 
+      name: radarr
