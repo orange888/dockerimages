@@ -5,8 +5,6 @@ import datetime
 import threading
 import argparse
 import httplib2
-import os
-import progressbar
 import re
 
 import requests
