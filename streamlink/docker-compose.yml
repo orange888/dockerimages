@@ -1,22 +1,16 @@
 version: '3.7'
 
-services:
- 
- test:
+x-common: &common
     image: liofal/streamlink  
     build:
       context: .
       dockerfile: Dockerfile
     volumes:
-    - ./streamlink-recorder.py:/streamlink-recorder.py
     - /volume1/twitch:/download
-    environment:
-      - user=polt
     env_file: 
         - ../global.env    
-        - .env
+        - default.env
         - clientid.env
-    user: "1027:100"
     logging:
       driver: json-file
     restart: on-failure
@@ -25,6 +19,14 @@ services:
         limits:
           memory: 128M
 
+services:
+ test:
+    <<: *common
+    volumes:
+    - ./streamlink-recorder.py:/streamlink-recorder.py
+    environment:
+      - user=polt
+ 
  sc2creator:
     image: liofal/streamlink  
     build:
