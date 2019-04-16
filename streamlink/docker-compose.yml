@@ -15,6 +15,7 @@ services:
     env_file: 
         - .env
         - ../global.env    
+        - clientid.env
     logging:
       driver: json-file
     restart: on-failure
@@ -35,6 +36,7 @@ services:
     env_file: 
         - .env
         - ../global.env    
+        - clientid.env
     logging:
       driver: json-file
     restart: on-failure
@@ -55,6 +57,7 @@ services:
     env_file: 
         - .env
         - ../global.env    
+        - clientid.env
     logging:
       driver: json-file
     restart: on-failure
@@ -75,6 +78,7 @@ services:
     env_file: 
         - .env
         - ../global.env    
+        - clientid.env
     logging:
       driver: json-file
     restart: on-failure
@@ -95,6 +99,7 @@ services:
     env_file: 
         - .env
         - ../global.env    
+        - clientid.env
     logging:
       driver: json-file
     restart: on-failure
@@ -115,6 +120,7 @@ services:
     env_file: 
         - .env
         - ../global.env    
+        - clientid.env
     logging:
       driver: json-file
     restart: on-failure
@@ -135,6 +141,7 @@ services:
     env_file: 
         - .env
         - ../global.env    
+        - clientid.env
     logging:
       driver: json-file
     restart: on-failure
@@ -155,6 +162,7 @@ services:
     env_file: 
         - .env
         - ../global.env    
+        - clientid.env
     logging:
       driver: json-file
     restart: on-failure
@@ -175,6 +183,7 @@ services:
     env_file: 
         - .env
         - ../global.env    
+        - clientid.env
     logging:
       driver: json-file
     restart: on-failure
