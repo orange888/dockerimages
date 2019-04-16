@@ -25,6 +25,7 @@ from oauth2client.file import Storage
 timer = 30
 user = ""
 quality = "best"
+is_recording = False
 
 # TODO: from a secret
 
