@@ -27,6 +27,28 @@ services:
     environment:
       - user=polt
  
+ qkrfuddn0:
+    image: liofal/streamlink  
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+    - /volume1/twitch:/download
+    environment:
+      - user=qkrfuddn0
+    env_file: 
+        - ../global.env    
+        - .env
+        - clientid.env
+    user: "1027:100"
+    logging:
+      driver: json-file
+    restart: on-failure
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+
  sc2creator:
     image: liofal/streamlink  
     build:
