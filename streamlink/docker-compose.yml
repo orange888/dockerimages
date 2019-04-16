@@ -5,12 +5,11 @@ x-common: &common
     build:
       context: .
       dockerfile: Dockerfile
-    volumes:
-    - /volume1/twitch:/download
     env_file: 
         - ../global.env    
         - default.env
         - clientid.env
+    user: 1027:100
     logging:
       driver: json-file
     restart: on-failure
@@ -18,12 +17,15 @@ x-common: &common
       resources:
         limits:
           memory: 128M
+    volumes:
+    - /volume1/twitch:/download
 
 services:
  test:
     <<: *common
     volumes:
     - ./streamlink-recorder.py:/streamlink-recorder.py
+    - /volume1/twitch:/download
     environment:
       - user=polt
  
@@ -50,7 +52,7 @@ services:
  kimclassic:
     <<: *common
     environment:
-      - user=polt
+      - user=kimclassic
  
  serral:
     <<: *common
