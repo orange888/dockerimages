@@ -28,244 +28,57 @@ services:
       - user=polt
  
  qkrfuddn0:
-    image: liofal/streamlink  
-    build:
-      context: .
-      dockerfile: Dockerfile
-    volumes:
-    - /volume1/twitch:/download
+    <<: *common
     environment:
       - user=qkrfuddn0
-    env_file: 
-        - ../global.env    
-        - .env
-        - clientid.env
-    user: "1027:100"
-    logging:
-      driver: json-file
-    restart: on-failure
-    deploy:
-      resources:
-        limits:
-          memory: 128M
-
+ 
  sc2creator:
-    image: liofal/streamlink  
-    build:
-      context: .
-      dockerfile: Dockerfile
-    volumes:
-    - /volume1/twitch:/download
+    <<: *common
     environment:
       - user=sc2creator
-    env_file: 
-        - ../global.env    
-        - .env
-        - clientid.env
-    user: "1027:100"
-    logging:
-      driver: json-file
-    restart: on-failure
-    deploy:
-      resources:
-        limits:
-          memory: 128M
 
  sc2_zest:
-    image: liofal/streamlink  
-    build:
-      context: .
-      dockerfile: Dockerfile
-    volumes:
-    - /volume1/twitch:/download
+    <<: *common
     environment:
       - user=sc2_zest
-    env_file: 
-        - .env
-        - ../global.env    
-        - clientid.env
-    user: "1027:100"
-    logging:
-      driver: json-file
-    restart: on-failure
-    deploy:
-      resources:
-        limits:
-          memory: 128M
-
+ 
  sc2soo:
-    image: liofal/streamlink  
-    build:
-      context: .
-      dockerfile: Dockerfile
-    volumes:
-    - /volume1/twitch:/download
+    <<: *common
     environment:
       - user=sc2soo
-    env_file: 
-        - .env
-        - ../global.env    
-        - clientid.env
-    user: "1027:100"
-    logging:
-      driver: json-file
-    restart: on-failure
-    deploy:
-      resources:
-        limits:
-          memory: 128M
  
  kimclassic:
-    image: liofal/streamlink  
-    build:
-      context: .
-      dockerfile: Dockerfile
-    volumes:
-    - /volume1/twitch:/download
+    <<: *common
     environment:
-      - user=kimclassic
-    env_file: 
-        - .env
-        - ../global.env    
-        - clientid.env
-    user: "1027:100"
-    logging:
-      driver: json-file
-    restart: on-failure
-    deploy:
-      resources:
-        limits:
-          memory: 128M
-  
+      - user=polt
+ 
  serral:
-    image: liofal/streamlink  
-    build:
-      context: .
-      dockerfile: Dockerfile
-    volumes:
-    - /volume1/twitch:/download
+    <<: *common
     environment:
       - user=serral
-    env_file: 
-        - .env
-        - ../global.env    
-        - clientid.env
-    user: "1027:100"
-    logging:
-      driver: json-file
-    restart: on-failure
-    deploy:
-      resources:
-        limits:
-          memory: 128M
 
  reynor2002:
-    image: liofal/streamlink  
-    build:
-      context: .
-      dockerfile: Dockerfile
-    volumes:
-    - /volume1/twitch:/download
+    <<: *common
     environment:
       - user=reynor2002
-    env_file: 
-        - .env
-        - ../global.env    
-        - clientid.env
-    user: "1027:100"
-    logging:
-      driver: json-file
-    restart: on-failure
-    deploy:
-      resources:
-        limits:
-          memory: 128M
 
  sc2tyty:
-    image: liofal/streamlink  
-    build:
-      context: .
-      dockerfile: Dockerfile
-    volumes:
-    - /volume1/twitch:/download
+    <<: *common
     environment:
       - user=sc2tyty
-    env_file: 
-        - .env
-        - ../global.env    
-        - clientid.env
-    user: "1027:100"
-    logging:
-      driver: json-file
-    restart: on-failure
-    deploy:
-      resources:
-        limits:
-          memory: 128M
  
  innovation_s2:
-    image: liofal/streamlink  
-    build:
-      context: .
-      dockerfile: Dockerfile
-    volumes:
-    - /volume1/twitch:/download
+    <<: *common
     environment:
       - user=innovation_s2
-    env_file: 
-        - .env
-        - ../global.env    
-        - clientid.env
-    user: "1027:100"
-    logging:
-      driver: json-file
-    restart: on-failure
-    deploy:
-      resources:
-        limits:
-          memory: 128M
   
  gumiho:
-    image: liofal/streamlink  
-    build:
-      context: .
-      dockerfile: Dockerfile
-    volumes:
-    - /volume1/twitch:/download
+    <<: *common
     environment:
       - user=gumiho
-    env_file: 
-        - .env
-        - ../global.env    
-        - clientid.env
-    user: "1027:100"
-    logging:
-      driver: json-file
-    restart: on-failure
-    deploy:
-      resources:
-        limits:
-          memory: 128M
   
  gostephano:
-    image: liofal/streamlink  
-    build:
-      context: .
-      dockerfile: Dockerfile
-    volumes:
-    - /volume1/twitch:/download
+    <<: *common
     environment:
       - user=gostephano
-    env_file: 
-        - .env
-        - ../global.env    
-        - clientid.env
-    user: "1027:100"
-    logging:
-      driver: json-file
-    restart: on-failure
-    deploy:
-      resources:
-        limits:
-          memory: 128M
  
