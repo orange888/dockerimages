@@ -25,13 +25,13 @@ from oauth2client.file import Storage
 timer = 30
 user = ""
 quality = "best"
-is_recording = False
-
-# TODO: from a secret
 
 # Init variables with some default values
 def post_to_slack(message):
-    
+    if slack_id is None:
+        print("slackid is not specified, so disabling slack notification")
+        pass
+
     slack_url = "https://hooks.slack.com/services/" + slack_id
     slack_data = {'text': message}
 
@@ -63,7 +63,7 @@ def check_user(user):
     return status
 
 def loopcheck():
-    global is_recording
+    is_recording = False
     status = check_user(user)
     if status == 2:
         print("username not found. invalid username?")
@@ -99,12 +99,14 @@ def main():
     global user
     global quality
     global client_id
+    global slack_id
 
     parser = argparse.ArgumentParser()
     parser.add_argument("-timer", help="Stream check interval (less than 15s are not recommended)")
     parser.add_argument("-user", help="Twitch user that we are checking")
     parser.add_argument("-quality", help="Recording quality")
     parser.add_argument("-clientid", help="Your twitch app client id")
+    parser.add_argument("-slackid", help="Your slack app client id")
     args = parser.parse_args()
 
     if args.timer is not None:
@@ -113,6 +115,8 @@ def main():
         user = args.user
     if args.quality is not None:
         quality = args.quality
+    if args.slackid is not None:
+        slack_id = args.slackid
 
     if args.clientid is not None:
         client_id = args.clientid

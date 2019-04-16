@@ -9,4 +9,4 @@ RUN apk add tzdata
 
 ADD streamlink-recorder.py /
 
-ENTRYPOINT python ./streamlink-recorder.py -timer=${timer} -user=${user} -quality=${quality} -clientid=${clientid}
+ENTRYPOINT python ./streamlink-recorder.py -timer=${timer} -user=${user} -quality=${quality} -clientid=${clientid} -slackid=${slackid}
