@@ -54,7 +54,6 @@ services:
       dockerfile: Dockerfile
     volumes:
     - /volume1/twitch:/download
-    - ./streamlink-recorder.py:/streamlink-recorder.py
     environment:
       - user=sc2_zest
     env_file: 
