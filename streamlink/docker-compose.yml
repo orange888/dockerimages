@@ -89,7 +89,7 @@ services:
         limits:
           memory: 128M
  
- sc2creator:
+ kimclassic:
     image: liofal/streamlink  
     build:
       context: .
@@ -97,7 +97,7 @@ services:
     volumes:
     - /volume1/twitch:/download
     environment:
-      - user=sc2creator
+      - user=kimclassic
     env_file: 
         - .env
         - ../global.env    
