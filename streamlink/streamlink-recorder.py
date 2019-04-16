@@ -9,6 +9,9 @@ import os
 import progressbar
 import re
 
+import requests
+import json
+
 from urllib.request import urlopen
 from urllib.error import URLError
 from threading import Timer
@@ -24,7 +27,24 @@ from oauth2client.file import Storage
 timer = 30
 user = ""
 quality = "best"
-is_recording = False
+
+# TODO: from a secret
+
+# Init variables with some default values
+def post_to_slack(message):
+    
+    slack_url = "https://hooks.slack.com/services/" + slack_id
+    slack_data = {'text': message}
+
+    response = requests.post(
+        slack_url, data=json.dumps(slack_data),
+        headers={'Content-Type': 'application/json'}
+    )
+    if response.status_code != 200:
+        raise ValueError(
+            'Request to slack returned an error %s, the response is:\n%s'
+            % (response.status_code, response.text)
+        )
 
 def check_user(user):
     """ returns 0: online, 1: offline, 2: not found, 3: error """
@@ -59,12 +79,14 @@ def loopcheck():
 
         if not is_recording:
             print("recording...")
+            post_to_slack("recording " + user+" ...")
             is_recording = True
             filename = datetime.datetime.now().strftime("%Y-%m-%d %H-%M-%S") + " - " + user + " - " + (info['stream']).get("channel").get(
                 "status") + ".flv"
             filename = re.sub('[^A-Za-z0-9. -\[\]@]+', '', filename)
             subprocess.call(["streamlink", "https://twitch.tv/" + user, quality, "-o", "/download/"+filename])
             print("Stream is done. Queuing upload if necessary and going back to checking..")
+            post_to_slack("Stream "+ user +"is done. Queuing upload if necessary and going back to checking..")
             is_recording = False
 
         else:
