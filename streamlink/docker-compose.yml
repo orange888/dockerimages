@@ -12,7 +12,7 @@ x-common: &common
     user: 1027:100
     logging:
       driver: json-file
-    restart: on-failure
+    restart: unless-stopped
     deploy:
       resources:
         limits:
