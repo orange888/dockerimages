@@ -83,9 +83,10 @@ def loopcheck():
             filename = datetime.datetime.now().strftime("%Y-%m-%d %H-%M-%S") + " - " + user + " - " + (info['stream']).get("channel").get(
                 "status") + ".flv"
             filename = re.sub('[^A-Za-z0-9. -\[\]@]+', '', filename)
+            filename = filename.replace(r'/', '_') 
             subprocess.call(["streamlink", "https://twitch.tv/" + user, quality,"--twitch-disable-hosting","-o", "/download/"+filename])
             print("Stream is done. Queuing upload if necessary and going back to checking..")
-            post_to_slack("Stream "+ user +"is done. Queuing upload if necessary and going back to checking..")
+            post_to_slack("Stream "+ user +" is done. Queuing upload if necessary and going back to checking..")
             is_recording = False
 
         else:
