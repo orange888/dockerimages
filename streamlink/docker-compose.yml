@@ -34,6 +34,61 @@ services:
     environment:
       - user=qkrfuddn0
  
+ jinairsos1:
+    <<: *common
+    environment:
+      - user=jinairsos1
+ 
+ gsl:
+    <<: *common
+    environment:
+      - user=gsl
+ 
+ starcraft:
+    <<: *common
+    environment:
+      - user=starcraft
+ 
+ maru072:
+    <<: *common
+    environment:
+      - user=maru072
+ 
+ kimdaeyeob3:
+    <<: *common
+    environment:
+      - user=kimdaeyeob3
+ 
+ roguejinair:
+    <<: *common
+    environment:
+      - user=roguejinair
+ 
+ sc2dear:
+    <<: *common
+    environment:
+      - user=sc2dear
+ 
+ hassc2:
+    <<: *common
+    environment:
+      - user=hassc2
+ 
+ krfantasy:
+    <<: *common
+    environment:
+      - user=krfantasy
+ 
+ sc2solar:
+    <<: *common
+    environment:
+      - user=sc2solar
+ 
+ SC2_Ragnarok:
+    <<: *common
+    environment:
+      - user=SC2_Ragnarok
+ 
  sc2creator:
     <<: *common
     environment:
