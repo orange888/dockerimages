@@ -29,6 +29,11 @@ services:
     environment:
       - user=polt
  
+ partingthebigboy:
+    <<: *common
+    environment:
+      - user=partingthebigboy
+ 
  qkrfuddn0:
     <<: *common
     environment:
