@@ -18,6 +18,7 @@ services:
     env_file: 
         - .env
         - ../global.env    
+        - clientid.env    
     hostname: liofal.synology.me
     volumes:
       - /volume1/docker/plex/config:/config
