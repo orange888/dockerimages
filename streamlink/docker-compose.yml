@@ -29,6 +29,31 @@ services:
     environment:
       - user=polt
  
+ liquidthermy:
+    <<: *common
+    environment:
+      - user=liquidthermy
+ 
+ scbomber:
+    <<: *common
+    environment:
+      - user=scbomber
+ 
+ egjd:
+    <<: *common
+    environment:
+      - user=egjd
+ 
+ dongraegu:
+    <<: *common
+    environment:
+      - user=dongraegu
+ 
+ leenock_:
+    <<: *common
+    environment:
+      - user=leenock_
+ 
  partingthebigboy:
     <<: *common
     environment:
