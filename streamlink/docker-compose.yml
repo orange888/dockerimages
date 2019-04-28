@@ -16,7 +16,7 @@ x-common: &common
     deploy:
       resources:
         limits:
-          memory: 128M
+          memory: 256M
     volumes:
     - /volume1/twitch:/download
 
