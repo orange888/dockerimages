@@ -9,6 +9,7 @@ import re
 
 import requests
 import json
+import os
 
 from urllib.request import urlopen
 from urllib.error import URLError
@@ -63,7 +64,6 @@ def check_user(user):
     return status
 
 def loopcheck():
-    is_recording = False
     status = check_user(user)
     if status == 2:
         print("username not found. invalid username?")
@@ -74,26 +74,21 @@ def loopcheck():
         print(user, "currently offline, checking again in", timer, "seconds")
         t.start()
     elif status == 0:
-        print(user, "online")
+        print(user, "online, recording ...")
+        post_to_slack("recording " + user+" ...")
+        filename = user + " - " + datetime.datetime.now().strftime("%Y-%m-%d %H-%M-%S") + " - " + (info['stream']).get("channel").get("status") + ".mp4"
+        
+        # clean filename from unecessary characters
+        filename = "".join(x for x in filename if x.isalnum() or x in [" ", "-", "_", "."])
+        recorded_filename = os.path.join("/download/", filename)
+        
+        # start streamlink process
+        subprocess.call(["streamlink", "--twitch-disable-hosting", "twitch.tv/" + user, quality, "-o", recorded_filename])
+        print("Stream is done. Queuing upload if necessary and going back to checking..")
+        post_to_slack("Stream "+ user +" is done. Queuing upload if necessary and going back to checking..")
 
-        if not is_recording:
-            print("recording...")
-            post_to_slack("recording " + user+" ...")
-            is_recording = True
-            filename = datetime.datetime.now().strftime("%Y-%m-%d %H-%M-%S") + " - " + user + " - " + (info['stream']).get("channel").get(
-                "status") + ".flv"
-            filename = re.sub('[^A-Za-z0-9. -\[\]@]+', '', filename)
-            filename = filename.replace(r'/', '_') 
-            subprocess.call(["streamlink", "https://twitch.tv/" + user, quality,"--twitch-disable-hosting","-o", "/download/"+filename])
-            print("Stream is done. Queuing upload if necessary and going back to checking..")
-            post_to_slack("Stream "+ user +" is done. Queuing upload if necessary and going back to checking..")
-            is_recording = False
-
-        else:
-            pass  # don't start a new recording if there is one running already
-
-        t = Timer(timer, loopcheck)
-        t.start()
+    t = Timer(timer, loopcheck)
+    t.start()
 
 def main():
     global timer
