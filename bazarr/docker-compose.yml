@@ -15,7 +15,7 @@ services:
       - /volume1/docker/bazarr/db:/config/db
       - /volume1/docker/bazarr/log:/config/log
       - /volume1/movies:/movies
-      - /volume1/tvshows:/tv:ro
+      - /volume1/tvshows:/tv
     logging:
       driver: json-file
     deploy:
