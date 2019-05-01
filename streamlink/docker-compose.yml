@@ -59,11 +59,6 @@ services:
     environment:
       - user=leenock_
  
- partingthebigboy:
-    <<: *common
-    environment:
-      - user=partingthebigboy
- 
  qkrfuddn0:
     <<: *common
     environment:
@@ -88,11 +83,6 @@ services:
     <<: *common
     environment:
       - user=maru072
- 
- kimdaeyeob3:
-    <<: *common
-    environment:
-      - user=kimdaeyeob3
  
  roguejinair:
     <<: *common
