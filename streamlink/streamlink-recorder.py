@@ -10,6 +10,7 @@ import re
 import requests
 import json
 import os
+import psutil
 
 from urllib.request import urlopen
 from urllib.error import URLError
@@ -65,6 +66,10 @@ def check_user(user):
             status = 3
     return status
 
+def check_process():
+    """ returns True: busy, False: absent """
+    return "streamlink" in (p.name() for p in psutil.process_iter())
+    
 def loopcheck():
     status = check_user(user)
     if status == 2:
@@ -76,18 +81,27 @@ def loopcheck():
         print(user, "currently offline, checking again in", timer, "seconds")
         t.start()
     elif status == 0:
-        print(user, "online, recording ...")
-        post_to_slack("recording " + user+" ...")
-        filename = user + " - " + datetime.datetime.now().strftime("%Y-%m-%d %H-%M-%S") + " - " + (info['stream']).get("channel").get("status") + ".mp4"
-        
-        # clean filename from unecessary characters
-        filename = "".join(x for x in filename if x.isalnum() or x in [" ", "-", "_", "."])
-        recorded_filename = os.path.join("/download/", filename)
-        
-        # start streamlink process
-        subprocess.call(["streamlink", "--twitch-disable-hosting", "twitch.tv/" + user, quality, "-o", recorded_filename])
-        print("Stream is done. Queuing upload if necessary and going back to checking..")
-        post_to_slack("Stream "+ user +" is done. Queuing upload if necessary and going back to checking..")
+        print(user, "online, checking on streamlink ...")
+        if check_process():
+            print("Streamlink already running, back to sleeping")
+        else:
+            filename = user + " - " + datetime.datetime.now().strftime("%Y-%m-%d %H-%M-%S") + " - " + (info['stream']).get("channel").get("status") + ".mp4"
+            
+            # clean filename from unecessary characters
+            filename = "".join(x for x in filename if x.isalnum() or x in [" ", "-", "_", "."])
+            recorded_filename = os.path.join("/download/", filename)
+            
+            # start streamlink process
+            print("No streamlink running ... checking if streamlink can handle url")
+            retcode = subprocess.call(["streamlink", "--twitch-disable-hosting", "--can-handle-url", "twitch.tv/" + user])
+
+            # start streamlink process
+            if retcode == 0:
+                post_to_slack("recording " + user+" ...")
+                print("Streamlink can handle url, recording ... ")
+                retcode = subprocess.call(["streamlink", "--twitch-disable-hosting", "--retry-max", "5", "--retry-streams", "60", "twitch.tv/" + user, quality, "-o", recorded_filename])
+                print("Stream is done. Queuing upload if necessary and going back to checking.. retcode is:", retcode)
+                post_to_slack("Stream "+ user +" is done. Queuing upload if necessary and going back to checking..")
 
     t = Timer(timer, loopcheck)
     t.start()
