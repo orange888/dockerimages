@@ -23,9 +23,11 @@ from oauth2client.clientsecrets import InvalidClientSecretsError
 from oauth2client.file import Storage
 
 # Init variables with some default values
-timer = 30
+timer = 300
 user = ""
 quality = "best"
+client_id = "jzkbprff40iqj646a697cyrvl0zt2m6"
+slack_id = ""
 
 # Init variables with some default values
 def post_to_slack(message):
@@ -116,8 +118,9 @@ def main():
 
     if args.clientid is not None:
         client_id = args.clientid
-    else:
-        print("Please create a twitch app and set the client id with -clientid [YOUR ID]")
+    
+    if client_id is None:
+        print("Please create a twitch app and set the client id with -clientid [YOUR ID] aaa")
         return
 
     t = Timer(timer, loopcheck)
