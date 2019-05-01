@@ -29,10 +29,15 @@ services:
     environment:
       - user=polt
  
- liquidthermy:
+ seed_sc2:
     <<: *common
     environment:
-      - user=liquidthermy
+      - user=seed_sc2
+ 
+ truesc2:
+    <<: *common
+    environment:
+      - user=truesc2
  
  scbomber:
     <<: *common
