@@ -116,7 +116,6 @@ def main():
 
     if args.clientid is not None:
         client_id = args.clientid
-    
     if client_id is None:
         print("Please create a twitch app and set the client id with -clientid [YOUR ID] aaa")
         return
