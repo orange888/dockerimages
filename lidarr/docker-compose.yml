@@ -1,0 +1,37 @@
+version: '3.7'
+
+services:
+  lidarr:
+    image: linuxserver/lidarr:latest
+    restart: unless-stopped
+    ports:
+      - 8686:8686/tcp
+    env_file: 
+        - .env
+        - ../global.env    
+    hostname: liofal.synology.me
+    volumes:
+      - /volume1/docker/lidarr/config:/config
+      - /volume1/lidarr:/downloads/complete/.lidarr
+      - /volume1/music:/music
+    logging:
+      driver: json-file
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    networks:
+      lidarr:
+      jackett:
+      transmission:
+  
+networks:
+  lidarr:
+    name: lidarr
+  jackett:
+    external: 
+      name: jackett
+  transmission:
+    external: 
+      name: transmission
+  
