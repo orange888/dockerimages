@@ -15,6 +15,7 @@ services:
       - /volume1/docker/transmission/config2:/config
       - /volume1/radarr:/downloads/complete/radarr
       - /volume1/sonarr:/downloads/complete/sonarr
+      - /volume1/lidarr:/downloads/complete/lidarr
       - /volume1/incoming:/watch
     logging:
       driver: json-file
