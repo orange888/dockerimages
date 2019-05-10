@@ -28,6 +28,7 @@ user = ""
 quality = "best"
 client_id = "jzkbprff40iqj646a697cyrvl0zt2m6"
 slack_id = ""
+games_list = "StarCraft II"
 
 # Init variables with some default values
 def post_to_slack(message):
@@ -56,6 +57,8 @@ def check_user(user):
         info = json.loads(urlopen(url, timeout=15).read().decode('utf-8'))
         if info['stream'] is None:
             status = 1
+        elif info['stream'].get("game") not in [games_list]:
+            status = 4
         else:
             status = 0
     except URLError as e:
@@ -73,6 +76,8 @@ def loopcheck():
         print("unexpected error. maybe try again later")
     elif status == 1:
         print(user, "currently offline, checking again in", timer, "seconds")
+    elif status == 4:
+        print("unwanted game stream, checking again in", timer, "seconds")
     elif status == 0:
         filename = user + " - " + datetime.datetime.now().strftime("%Y-%m-%d %H-%M-%S") + " - " + (info['stream']).get("channel").get("status") + ".mp4"
         
@@ -104,7 +109,7 @@ def main():
     parser.add_argument("-clientid", help="Your twitch app client id")
     parser.add_argument("-slackid", help="Your slack app client id")
     args = parser.parse_args()
-
+ 
     if args.timer is not None:
         timer = int(args.timer)
     if args.user is not None:
