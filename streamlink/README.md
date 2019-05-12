@@ -5,7 +5,15 @@ I could not find an existing image that would respond exactly to my needs so I c
 
 I decided to build it automatically on docker hub to access from my swarm nodes, when I saw many downloads, I decided to document a bit more the project, for my personnal experience and to encourage reusability
 
-I will adapt rapidly in the future to avoid
+Questions, suggestions, requests, reach me out on [![alt text][1.1]][1]
+
+# Notes
+
+## 1.4.0-beta
+Games list filter selection
+
+## 1.3.0
+Introducing multi-stage building
 
 # Credits
 Thanks to the work of the original owners, so far I used and adapted python scripts from 
@@ -77,3 +85,5 @@ you can specify the default for compose here
 _**Warning:** The folder does not exist in the container and need te be created as a volume in order to be accessed from outside your container, you should map it if you want to access it_
 
 
+[1.1]: http://i.imgur.com/tXSoThF.png (twitter icon with padding)
+[1]: http://www.twitter.com/liofal
