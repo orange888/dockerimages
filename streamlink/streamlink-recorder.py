@@ -84,8 +84,8 @@ def loopcheck():
         post_to_slack("recording " + user+" ...")
         print(user, "recording ... ")
         retcode = subprocess.call(["streamlink", "--twitch-disable-hosting", "--retry-max", "5", "--retry-streams", "60", "twitch.tv/" + user, quality, "-o", recorded_filename])
-        print("Stream is done. Queuing upload if necessary and going back to checking.. retcode is:", retcode)
-        post_to_slack("Stream "+ user +" is done. Queuing upload if necessary and going back to checking..")
+        print("Stream is done. Going back to checking.. retcode is:", retcode)
+        post_to_slack("Stream "+ user +" is done. Going back to checking..")
 
     t = Timer(timer, loopcheck)
     t.start()

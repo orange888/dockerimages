@@ -26,8 +26,6 @@ I cleaned up and adapted following my requirements and added a slack integration
 
 All rights are reserved to the original script owners, tell me if I need to remove those however, I might be working on a rewrite from scratch removing few dependencies to python libraries
 
-# Useage
-
 # Quality
 Quality is specified within the stream, any twitch quality specified existing for the stream can be defined
 
