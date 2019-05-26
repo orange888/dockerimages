@@ -39,17 +39,14 @@ services:
     <<: *common
     environment:
       - user=eternalenvyy
- 
- seed_sc2:
+      - quality=best
+
+ miracle_doto:
     <<: *common
     environment:
-      - user=seed_sc2
- 
- truesc2:
-    <<: *common
-    environment:
-      - user=truesc2
- 
+      - user=miracle_doto
+      - quality=best
+
  scbomber:
     <<: *common
     environment:
@@ -65,11 +62,6 @@ services:
     environment:
       - user=dongraegu
  
- leenock_:
-    <<: *common
-    environment:
-      - user=leenock_
- 
  qkrfuddn0:
     <<: *common
     environment:
@@ -84,6 +76,7 @@ services:
     <<: *common
     environment:
       - user=gsl
+      - quality=best
  
  starcraft:
     <<: *common
@@ -94,6 +87,7 @@ services:
     <<: *common
     environment:
       - user=maru072
+      - quality=best
  
  roguejinair:
     <<: *common
@@ -130,11 +124,6 @@ services:
     environment:
       - user=sc2creator
 
- sc2_zest:
-    <<: *common
-    environment:
-      - user=sc2_zest
- 
  sc2soo:
     <<: *common
     environment:
@@ -149,17 +138,14 @@ services:
     <<: *common
     environment:
       - user=serral
+      - quality=best
 
  reynor2002:
     <<: *common
     environment:
       - user=reynor2002
+      - quality=best
 
- sc2tyty:
-    <<: *common
-    environment:
-      - user=sc2tyty
- 
  innovation_s2:
     <<: *common
     environment:
