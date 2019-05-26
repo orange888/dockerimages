@@ -28,7 +28,7 @@ user = ""
 quality = "best"
 client_id = "jzkbprff40iqj646a697cyrvl0zt2m6"
 slack_id = ""
-games_list = "StarCraft II"
+game_list = "StarCraft II"
 
 # Init variables with some default values
 def post_to_slack(message):
@@ -57,7 +57,7 @@ def check_user(user):
         info = json.loads(urlopen(url, timeout=15).read().decode('utf-8'))
         if info['stream'] is None:
             status = 1
-        elif info['stream'].get("game") not in [games_list]:
+        elif info['stream'].get("game") not in [game_list]:
             status = 4
         else:
             status = 0
@@ -101,6 +101,7 @@ def main():
     global quality
     global client_id
     global slack_id
+    global game_list
 
     parser = argparse.ArgumentParser()
     parser.add_argument("-timer", help="Stream check interval (less than 15s are not recommended)")
@@ -108,6 +109,7 @@ def main():
     parser.add_argument("-quality", help="Recording quality")
     parser.add_argument("-clientid", help="Your twitch app client id")
     parser.add_argument("-slackid", help="Your slack app client id")
+    parser.add_argument("-gamelist", help="The game list to be recorded")
     args = parser.parse_args()
  
     if args.timer is not None:
@@ -118,6 +120,8 @@ def main():
         quality = args.quality
     if args.slackid is not None:
         slack_id = args.slackid
+    if args.gamelist is not None:
+        game_list = args.game_list
 
     if args.clientid is not None:
         client_id = args.clientid
