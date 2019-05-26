@@ -11,6 +11,7 @@ Questions, suggestions, requests, reach me out on [![alt text][1.1]][1]
 
 ## 1.4.0-beta
 Games list filter selection
+Upgrade python
 
 ## 1.3.0
 Introducing multi-stage building

@@ -28,7 +28,7 @@ user = ""
 quality = "best"
 client_id = "jzkbprff40iqj646a697cyrvl0zt2m6"
 slack_id = ""
-game_list = "StarCraft II"
+game_list = ""
 
 # Init variables with some default values
 def post_to_slack(message):
@@ -57,7 +57,7 @@ def check_user(user):
         info = json.loads(urlopen(url, timeout=15).read().decode('utf-8'))
         if info['stream'] is None:
             status = 1
-        elif info['stream'].get("game") not in [game_list]:
+        elif game_list !='' and info['stream'].get("game") not in game_list.split(','):
             status = 4
         else:
             status = 0
@@ -88,8 +88,8 @@ def loopcheck():
         # start streamlink process
         post_to_slack("recording " + user+" ...")
         print(user, "recording ... ")
-        retcode = subprocess.call(["streamlink", "--twitch-disable-hosting", "--retry-max", "5", "--retry-streams", "60", "twitch.tv/" + user, quality, "-o", recorded_filename])
-        print("Stream is done. Going back to checking.. retcode is:", retcode)
+        subprocess.call(["streamlink", "--twitch-disable-hosting", "--retry-max", "5", "--retry-streams", "60", "twitch.tv/" + user, quality, "-o", recorded_filename])
+        print("Stream is done. Going back to checking.. ")
         post_to_slack("Stream "+ user +" is done. Going back to checking..")
 
     t = Timer(timer, loopcheck)
@@ -121,7 +121,7 @@ def main():
     if args.slackid is not None:
         slack_id = args.slackid
     if args.gamelist is not None:
-        game_list = args.game_list
+        game_list = args.gamelist
 
     if args.clientid is not None:
         client_id = args.clientid
