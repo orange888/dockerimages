@@ -40,12 +40,14 @@ services:
     environment:
       - user=eternalenvyy
       - quality=best
+      - game_list=Dota 2
 
  miracle_doto:
     <<: *common
     environment:
       - user=miracle_doto
       - quality=best
+      - game_list=Dota 2
 
  scbomber:
     <<: *common
