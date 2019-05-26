@@ -30,11 +30,6 @@ services:
       - user=polt
       - quality=worst
  
- trap321:
-    <<: *common
-    environment:
-      - user=trap321
- 
  eternalenvyy:
     <<: *common
     environment:
