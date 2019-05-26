@@ -47,6 +47,11 @@ services:
     environment:
       - user=scbomber
  
+ idralingsc:
+    <<: *common
+    environment:
+      - user=idralingsc
+ 
  egjd:
     <<: *common
     environment:
