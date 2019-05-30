@@ -1,7 +1,7 @@
 version: '3.7'
 
 x-common: &common
-    image: liofal/streamlink:latest
+    image: liofal/streamlink:1.4.0-beta
     build:
       context: .
       dockerfile: Dockerfile
@@ -71,11 +71,13 @@ services:
     environment:
       - user=gsl
       - quality=best
+      - gamelist=StarCraft II
  
  starcraft:
     <<: *common
     environment:
       - user=starcraft
+      - gamelist=StarCraft II
  
  maru072:
     <<: *common

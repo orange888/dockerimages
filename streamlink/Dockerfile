@@ -13,4 +13,4 @@ COPY --from=builder /install /usr/local
 ADD streamlink-recorder.py /
 
 # Configure entrypoint with environment variables (only user is mandatory)
-ENTRYPOINT python ./streamlink-recorder.py -user=${user} -timer=${timer} -quality=${quality} -clientid=${clientid} -slackid=${slackid}
+ENTRYPOINT python ./streamlink-recorder.py -user=${user} -timer=${timer} -quality=${quality} -clientid=${clientid} -slackid=${slackid} -gamelist="${gamelist}"

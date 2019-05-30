@@ -28,6 +28,7 @@ user = ""
 quality = "best"
 client_id = "jzkbprff40iqj646a697cyrvl0zt2m6"
 slack_id = ""
+game_list = ""
 
 # Init variables with some default values
 def post_to_slack(message):
@@ -56,6 +57,8 @@ def check_user(user):
         info = json.loads(urlopen(url, timeout=15).read().decode('utf-8'))
         if info['stream'] is None:
             status = 1
+        elif game_list !='' and info['stream'].get("game") not in game_list.split(','):
+            status = 4
         else:
             status = 0
     except URLError as e:
@@ -73,6 +76,8 @@ def loopcheck():
         print("unexpected error. maybe try again later")
     elif status == 1:
         print(user, "currently offline, checking again in", timer, "seconds")
+    elif status == 4:
+        print("unwanted game stream, checking again in", timer, "seconds")
     elif status == 0:
         filename = user + " - " + datetime.datetime.now().strftime("%Y-%m-%d %H-%M-%S") + " - " + (info['stream']).get("channel").get("status") + ".mp4"
         
@@ -83,8 +88,8 @@ def loopcheck():
         # start streamlink process
         post_to_slack("recording " + user+" ...")
         print(user, "recording ... ")
-        retcode = subprocess.call(["streamlink", "--twitch-disable-hosting", "--retry-max", "5", "--retry-streams", "60", "twitch.tv/" + user, quality, "-o", recorded_filename])
-        print("Stream is done. Going back to checking.. retcode is:", retcode)
+        subprocess.call(["streamlink", "--twitch-disable-hosting", "--retry-max", "5", "--retry-streams", "60", "twitch.tv/" + user, quality, "-o", recorded_filename])
+        print("Stream is done. Going back to checking.. ")
         post_to_slack("Stream "+ user +" is done. Going back to checking..")
 
     t = Timer(timer, loopcheck)
@@ -96,6 +101,7 @@ def main():
     global quality
     global client_id
     global slack_id
+    global game_list
 
     parser = argparse.ArgumentParser()
     parser.add_argument("-timer", help="Stream check interval (less than 15s are not recommended)")
@@ -103,8 +109,9 @@ def main():
     parser.add_argument("-quality", help="Recording quality")
     parser.add_argument("-clientid", help="Your twitch app client id")
     parser.add_argument("-slackid", help="Your slack app client id")
+    parser.add_argument("-gamelist", help="The game list to be recorded")
     args = parser.parse_args()
-
+ 
     if args.timer is not None:
         timer = int(args.timer)
     if args.user is not None:
@@ -113,6 +120,8 @@ def main():
         quality = args.quality
     if args.slackid is not None:
         slack_id = args.slackid
+    if args.gamelist is not None:
+        game_list = args.gamelist
 
     if args.clientid is not None:
         client_id = args.clientid
