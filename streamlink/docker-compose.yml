@@ -40,13 +40,7 @@ services:
     <<: *common
     environment:
       - user=miracle_doto
-      - quality=best
 
- scbomber:
-    <<: *common
-    environment:
-      - user=scbomber
- 
  idralingsc:
     <<: *common
     environment:
@@ -94,45 +88,15 @@ services:
     environment:
       - user=roguejinair
  
- sc2dear:
-    <<: *common
-    environment:
-      - user=sc2dear
- 
- hassc2:
-    <<: *common
-    environment:
-      - user=hassc2
- 
- krfantasy:
-    <<: *common
-    environment:
-      - user=krfantasy
- 
  sc2solar:
     <<: *common
     environment:
       - user=sc2solar
  
- SC2_Ragnarok:
-    <<: *common
-    environment:
-      - user=SC2_Ragnarok
- 
- sc2creator:
-    <<: *common
-    environment:
-      - user=sc2creator
-
  sc2soo:
     <<: *common
     environment:
       - user=sc2soo
- 
- kimclassic:
-    <<: *common
-    environment:
-      - user=kimclassic
  
  serral:
     <<: *common
@@ -150,11 +114,6 @@ services:
     <<: *common
     environment:
       - user=innovation_s2
-  
- gumiho:
-    <<: *common
-    environment:
-      - user=gumiho
   
  gostephano:
     <<: *common
