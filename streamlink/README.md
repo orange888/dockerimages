@@ -7,9 +7,11 @@ I decided to build it automatically on docker hub to access from my swarm nodes,
 
 Questions, suggestions, requests, reach me out on [![alt text][1.1]][1]
 
+I'm also interested with new projects for automation of daily popular tasks, don't hesitate, I'm waiting for new ideas
+
 # Notes
 
-## 1.4.0-beta
+## 1.4.0
 Games list filter selection
 Upgrade python
 
