@@ -34,7 +34,6 @@ services:
     <<: *common
     environment:
       - user=eternalenvyy
-      - quality=best
 
  miracle_doto:
     <<: *common
@@ -77,6 +76,7 @@ services:
     <<: *common
     environment:
       - user=starcraft
+      - quality=best
       - gamelist=StarCraft II
  
  maru072:
@@ -121,4 +121,14 @@ services:
     <<: *common
     environment:
       - user=gostephano
- 
+      - quality=best
+
+ SC2_Ragnarok:
+    <<: *common
+    environment:
+      - user=SC2_Ragnarok
+
+ taketv:
+   <<: *common
+   environment:
+      - user=taketv
