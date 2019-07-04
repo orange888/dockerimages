@@ -1,5 +1,5 @@
 # Build dependencies in python
-FROM python:3-alpine as builder
+FROM python:3.7.3-alpine3.10 as builder
 
 # Install every build dependencies in builder image
 RUN apk add gcc musl-dev --no-cache

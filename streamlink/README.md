@@ -11,6 +11,10 @@ I'm also interested with new projects for automation of daily popular tasks, don
 
 # Notes
 
+## 1.4.1
+Upgrade python
+Explicit version of python to control the release cycle of base images
+
 ## 1.4.0
 Games list filter selection
 Upgrade python
