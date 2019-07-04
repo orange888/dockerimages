@@ -21,14 +21,14 @@ x-common: &common
     - /volume1/twitch:/download
 
 services:
- test:
-    <<: *common
-    volumes:
-    - ./streamlink-recorder.py:/streamlink-recorder.py
-    - /volume1/twitch:/download
-    environment:
-      - user=polt
-      - quality=worst
+#  test:
+#     <<: *common
+#     volumes:
+#     - ./streamlink-recorder.py:/streamlink-recorder.py
+#     - /volume1/twitch:/download
+#     environment:
+#       - user=polt
+#       - quality=worst
  
  eternalenvyy:
     <<: *common
