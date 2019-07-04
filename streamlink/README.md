@@ -11,7 +11,7 @@ I'm also interested with new projects for automation of daily popular tasks, don
 
 # Notes
 
-## 1.4.1
+## 1.5.0
 Upgrade python
 Explicit version of python to control the release cycle of base images
 
