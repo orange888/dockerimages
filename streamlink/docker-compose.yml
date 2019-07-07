@@ -127,8 +127,3 @@ services:
     <<: *common
     environment:
       - user=SC2_Ragnarok
-
- taketv:
-   <<: *common
-   environment:
-      - user=taketv
