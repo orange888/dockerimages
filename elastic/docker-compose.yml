@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   elasticsearch:
-    image: elasticsearch:7.1.1
+    image: elasticsearch:7.2.0
     restart: unless-stopped
     hostname: liofal.synology.me
     ports:
@@ -28,7 +28,7 @@ services:
       elasticsearch:
 
   kibana:
-    image: kibana:7.1.1
+    image: kibana:7.2.0
     restart: unless-stopped
     hostname: liofal.synology.me
     ports:
@@ -52,7 +52,7 @@ services:
       elasticsearch:
 
   metricbeat:
-    image: docker.elastic.co/beats/metricbeat:7.1.1
+    image: docker.elastic.co/beats/metricbeat:7.2.0
     restart: unless-stopped
     hostname: liofal.synology.me
     env_file: 
@@ -74,48 +74,6 @@ services:
     networks:
       elasticsearch:
     
-  packetbeat:
-    image: docker.elastic.co/beats/packetbeat:7.1.1
-    hostname: liofal.synology.me
-    env_file: 
-        - .env
-        - ../global.env    
-    logging:
-      driver: json-file
-    deploy:
-      resources:
-        limits:
-          memory: 512M
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      #- ./packetbeat.yml:/usr/share/packetbeat/packetbeat.yml
-    cap_add:
-      - NET_RAW
-      - NET_ADMIN
-    command: ["--strict.perms=false"]
-    networks:
-      elasticsearch:
-    
-  auditbeat:
-    image: docker.elastic.co/beats/auditbeat:7.1.1
-    hostname: liofal.synology.me
-    env_file: 
-        - .env
-        - ../global.env
-    logging:
-      driver: json-file
-    deploy:
-      resources:
-        limits:
-          memory: 512M
-    volumes:
-      - /var/log:/var/log:ro
-    cap_add:
-      - AUDIT_CONTROL
-    command: ["--strict.perms=false"]
-    networks:
-      elasticsearch:
-
 volumes:
   elasticsearch:
   kibana:
