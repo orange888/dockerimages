@@ -1,0 +1,84 @@
+version: '3.7'
+
+services:
+  elasticsearch:
+    image: elasticsearch:7.2.0
+    restart: unless-stopped
+    hostname: liofal.synology.me
+    ports:
+      - 9200:9200/tcp
+      - 9300:9300/tcp
+    env_file: 
+        - .env
+        - ../global.env    
+    environment: 
+        - discovery.type=single-node
+        - network.host=0.0.0.0
+        - ELASTIC_PASSWORD=${ELASTICSEARCH_PASSWORD:-changeme}
+        - node.name={{.Node.Hostname}}-elasticsearch
+    logging:
+      driver: json-file
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+    volumes:
+      - elasticsearch:/usr/share/elasticsearch/data
+    networks:
+      elasticsearch:
+
+  kibana:
+    image: kibana:7.2.0
+    restart: unless-stopped
+    hostname: liofal.synology.me
+    ports:
+      - 5601:5601/tcp
+    env_file: 
+        - .env
+        - ../global.env    
+    environment: 
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+      - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME:-elastic}
+      - ELASTICSEARCH_PASSWORD=${ELASTICSEARCH_PASSWORD:-changeme}
+    volumes:
+      - kibana:/usr/share/kibana/data
+    logging:
+      driver: json-file
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+    networks:
+      elasticsearch:
+
+  metricbeat:
+    image: docker.elastic.co/beats/metricbeat:7.2.0
+    restart: unless-stopped
+    hostname: liofal.synology.me
+    env_file: 
+        - .env
+        - ../global.env    
+    logging:
+      driver: json-file
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+    volumes:
+      - /proc:/hostfs/proc:ro
+      - /sys/fs/cgroup:/hostfs/sys/fs/cgroup:ro
+      - /:/hostfs:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      #- ./metricbeat.yml:/usr/share/metricbeat/metricbeat.yml
+    command: ["--strict.perms=false"]
+    networks:
+      elasticsearch:
+    
+volumes:
+  elasticsearch:
+  kibana:
+
+networks:
+  elasticsearch:
+    name: elasticsearch  
+
