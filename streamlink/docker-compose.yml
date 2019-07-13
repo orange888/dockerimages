@@ -35,21 +35,6 @@ services:
     environment:
       - user=eternalenvyy
 
- miracle_doto:
-    <<: *common
-    environment:
-      - user=miracle_doto
-
- idralingsc:
-    <<: *common
-    environment:
-      - user=idralingsc
- 
- egjd:
-    <<: *common
-    environment:
-      - user=egjd
- 
  dongraegu:
     <<: *common
     environment:
@@ -90,11 +75,6 @@ services:
     environment:
       - user=roguejinair
  
- sc2solar:
-    <<: *common
-    environment:
-      - user=sc2solar
- 
  sc2soo:
     <<: *common
     environment:
@@ -112,18 +92,14 @@ services:
       - user=reynor2002
       - quality=best
 
- innovation_s2:
-    <<: *common
-    environment:
-      - user=innovation_s2
-  
  gostephano:
     <<: *common
     environment:
       - user=gostephano
       - quality=best
 
- SC2_Ragnarok:
+ dogen_z:
     <<: *common
     environment:
-      - user=SC2_Ragnarok
+      - user=dogen_z
+      - quality=worst
