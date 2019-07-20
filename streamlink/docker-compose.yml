@@ -35,10 +35,15 @@ services:
     environment:
       - user=eternalenvyy
 
- dongraegu:
+ sc2keen:
     <<: *common
     environment:
-      - user=dongraegu
+      - user=sc2keen
+ 
+ sc2creator:
+    <<: *common
+    environment:
+      - user=sc2creator
  
  qkrfuddn0:
     <<: *common
@@ -98,8 +103,13 @@ services:
       - user=gostephano
       - quality=best
 
- dogen_z:
+ dogen:
     <<: *common
     environment:
-      - user=dogen_z
+      - user=dogen
       - quality=worst
+
+ scbomber:
+    <<: *common
+    environment:
+      - user=scbomber
