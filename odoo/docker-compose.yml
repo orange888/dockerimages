@@ -70,7 +70,6 @@ volumes:
   odoo-web-data:
   odoo-db-data:
   odoo-pgadmin-data:
-  
 
 networks:
   odoo:
