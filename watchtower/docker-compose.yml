@@ -8,3 +8,4 @@ services:
     command: --interval 30
     logging:
       driver: json-file
+    network_mode: "none"
