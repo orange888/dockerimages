@@ -5,6 +5,7 @@ FROM python:3.7.4-alpine3.10 as builder
 RUN apk add gcc musl-dev --no-cache
 RUN mkdir /install
 WORKDIR /install
+RUN pip install --upgrade pip
 RUN pip install --install-option="--prefix=/install" --upgrade streamlink google-api-python-client oauth2client
 
 # Run in minimal alpine container with no other dependencies
