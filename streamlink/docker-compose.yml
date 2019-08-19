@@ -40,11 +40,6 @@ services:
     environment:
       - user=sc2keen
  
- sc2creator:
-    <<: *common
-    environment:
-      - user=sc2creator
- 
  qkrfuddn0:
     <<: *common
     environment:
@@ -59,14 +54,12 @@ services:
     <<: *common
     environment:
       - user=gsl
-      - quality=best
       - gamelist=StarCraft II
  
  starcraft:
     <<: *common
     environment:
       - user=starcraft
-      - quality=best
       - gamelist=StarCraft II
  
  maru072:
@@ -95,13 +88,11 @@ services:
     <<: *common
     environment:
       - user=reynor2002
-      - quality=best
 
  gostephano:
     <<: *common
     environment:
       - user=gostephano
-      - quality=best
 
  dogen:
     <<: *common
@@ -113,3 +104,9 @@ services:
     <<: *common
     environment:
       - user=scbomber
+
+ n33bl3t:
+    <<: *common
+    environment:
+      - user=n33bl3t
+      - quality=best
