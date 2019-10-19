@@ -30,26 +30,6 @@ services:
 #       - user=polt
 #       - quality=worst
  
- eternalenvyy:
-    <<: *common
-    environment:
-      - user=eternalenvyy
-
- sc2keen:
-    <<: *common
-    environment:
-      - user=sc2keen
- 
- qkrfuddn0:
-    <<: *common
-    environment:
-      - user=qkrfuddn0
- 
- jinairsos1:
-    <<: *common
-    environment:
-      - user=jinairsos1
- 
  gsl:
     <<: *common
     environment:
@@ -68,16 +48,6 @@ services:
       - user=maru072
       - quality=best
  
- roguejinair:
-    <<: *common
-    environment:
-      - user=roguejinair
- 
- sc2soo:
-    <<: *common
-    environment:
-      - user=sc2soo
- 
  serral:
     <<: *common
     environment:
@@ -88,22 +58,6 @@ services:
     <<: *common
     environment:
       - user=reynor2002
-
- gostephano:
-    <<: *common
-    environment:
-      - user=gostephano
-
- dogen:
-    <<: *common
-    environment:
-      - user=dogen
-      - quality=worst
-
- scbomber:
-    <<: *common
-    environment:
-      - user=scbomber
 
  n33bl3t:
     <<: *common
