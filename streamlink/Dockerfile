@@ -1,5 +1,8 @@
+# Specify base image
+FROM python:3.8.0-alpine3.10 as base
+
 # Build dependencies in python
-FROM python:3.7.4-alpine3.10 as builder
+FROM base as builder
 
 # Install every build dependencies in builder image
 RUN apk add gcc musl-dev --no-cache
@@ -9,7 +12,7 @@ RUN pip install --upgrade pip
 RUN pip install --install-option="--prefix=/install" --upgrade streamlink google-api-python-client oauth2client
 
 # Run in minimal alpine container with no other dependencies
-FROM python:3.7.4-alpine3.10 as runner
+FROM base as runner
 COPY --from=builder /install /usr/local
 ADD streamlink-recorder.py /
 
