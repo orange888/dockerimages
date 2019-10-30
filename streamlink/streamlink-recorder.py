@@ -82,8 +82,8 @@ def check_user(user):
             info = get_from_twitch('streams?user_id=' + userid )
             if len(info['data']) == 0 :
                 status = 1
-            # elif game_list !='' and info['stream'].get("game") not in game_list.split(','):
-            #     status = 4
+            elif game_list !='' and info['data'][0].get("game_id") not in game_list.split(','):
+                 status = 4
             else:
                 status = 0
     except Exception:
