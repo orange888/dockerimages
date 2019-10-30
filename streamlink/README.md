@@ -11,6 +11,10 @@ I'm also interested with new projects for automation of daily popular tasks, don
 
 # Notes
 
+## 1.6.0
+Upgrade python
+Adapt recorder script to rely on upgrade version of twitch API
+
 ## 1.5.0
 Upgrade python
 Explicit version of python to control the release cycle of base images
