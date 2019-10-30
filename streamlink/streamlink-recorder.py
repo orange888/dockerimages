@@ -1,26 +1,13 @@
 # This script checks if a user on twitch is currently streaming and then records the stream via streamlink
-import json
 import subprocess
 import datetime
-import threading
 import argparse
-import httplib2
-import re
 
 import requests
 import json
 import os
 
-from urllib.request import urlopen
-from urllib.error import URLError
 from threading import Timer
-
-from apiclient import discovery
-from googleapiclient.http import MediaFileUpload
-from oauth2client import client
-from oauth2client import tools
-from oauth2client.clientsecrets import InvalidClientSecretsError
-from oauth2client.file import Storage
 
 # Init variables with some default values
 timer = 30
@@ -163,7 +150,6 @@ def main():
 
     print("Checking for", user, "every", timer, "seconds. Record with", quality, "quality.")
     loopcheck()
-
 
 if __name__ == "__main__":
     # execute only if run as a script
