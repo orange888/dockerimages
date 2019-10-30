@@ -34,13 +34,13 @@ services:
     <<: *common
     environment:
       - user=gsl
-      - gamelist=StarCraft II
+      - gamelist=496902
  
  starcraft:
     <<: *common
     environment:
       - user=starcraft
-      - gamelist=StarCraft II
+      - gamelist=496902
  
  maru072:
     <<: *common
