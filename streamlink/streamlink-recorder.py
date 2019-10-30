@@ -1,32 +1,19 @@
 # This script checks if a user on twitch is currently streaming and then records the stream via streamlink
-import json
 import subprocess
 import datetime
-import threading
 import argparse
-import httplib2
-import re
 
 import requests
 import json
 import os
 
-from urllib.request import urlopen
-from urllib.error import URLError
 from threading import Timer
-
-from apiclient import discovery
-from googleapiclient.http import MediaFileUpload
-from oauth2client import client
-from oauth2client import tools
-from oauth2client.clientsecrets import InvalidClientSecretsError
-from oauth2client.file import Storage
 
 # Init variables with some default values
 timer = 30
 user = ""
 quality = "best"
-client_id = "jzkbprff40iqj646a697cyrvl0zt2m6"
+client_id = ""
 slack_id = ""
 game_list = ""
 
@@ -49,29 +36,61 @@ def post_to_slack(message):
             % (response.status_code, response.text)
         )
 
-def check_user(user):
-    """ returns 0: online, 1: offline, 2: not found, 3: error """
-    global info
-    url = 'https://api.twitch.tv/kraken/streams/' + user + '?client_id=' + client_id
+def get_from_twitch(operation):
+    if client_id is None:
+        print("client_id is not specified")
+        pass
+
+    url = 'https://api.twitch.tv/helix/' + operation
+
+    response = requests.get(
+        url, 
+        headers={'Client-ID': 'jzkbprff40iqj646a697cyrvl0zt2m6'}
+    )
+    if response.status_code != 200:
+        raise ValueError(
+            'Request to twitch returned an error %s, the response is:\n%s'
+            % (response.status_code, response.text)
+        )
     try:
-        info = json.loads(urlopen(url, timeout=15).read().decode('utf-8'))
-        if info['stream'] is None:
-            status = 1
-        elif game_list !='' and info['stream'].get("game") not in game_list.split(','):
-            status = 4
-        else:
-            status = 0
-    except URLError as e:
-        if e.reason == 'Not Found' or e.reason == 'Unprocessable Entity':
+        info = json.loads(response.content)
+        # print(json.dumps(info, indent=4, sort_keys=True))
+    except Exception as e:
+        print(e)
+    return info
+
+def check_user(user):
+    userid = getuserid(user)
+
+    try:
+        if userid == 0 :
             status = 2
         else:
-            status = 3
+            info = get_from_twitch('streams?user_id=' + userid )
+            if len(info['data']) == 0 :
+                status = 1
+            elif game_list !='' and info['data'][0].get("game_id") not in game_list.split(','):
+                 status = 4
+            else:
+                status = 0
+    except Exception:
+        status = 3
     return status
+
+def getuserid(user):
+
+    try:
+        info = get_from_twitch('users?login=' + user )
+        userid = info['data'][0].get("id")
+    except Exception:
+        userid = 0
+    return userid
 
 def loopcheck():
     status = check_user(user)
     if status == 2:
         print("username not found. invalid username?")
+        return
     elif status == 3:
         print("unexpected error. maybe try again later")
     elif status == 1:
@@ -79,7 +98,7 @@ def loopcheck():
     elif status == 4:
         print("unwanted game stream, checking again in", timer, "seconds")
     elif status == 0:
-        filename = user + " - " + datetime.datetime.now().strftime("%Y-%m-%d %H-%M-%S") + " - " + (info['stream']).get("channel").get("status") + ".mp4"
+        filename = user + " - " + datetime.datetime.now().strftime("%Y-%m-%d %H-%M-%S") + " - " + "title" + ".mp4"
         
         # clean filename from unecessary characters
         filename = "".join(x for x in filename if x.isalnum() or x in [" ", "-", "_", "."])
@@ -126,12 +145,11 @@ def main():
     if args.clientid is not None:
         client_id = args.clientid
     if client_id is None:
-        print("Please create a twitch app and set the client id with -clientid [YOUR ID] aaa")
+        print("Please create a twitch app and set the client id with -clientid [YOUR ID]")
         return
 
     print("Checking for", user, "every", timer, "seconds. Record with", quality, "quality.")
     loopcheck()
-
 
 if __name__ == "__main__":
     # execute only if run as a script
