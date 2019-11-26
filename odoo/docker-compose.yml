@@ -45,31 +45,9 @@ services:
     networks:
       odoo:
 
-  pgadmin:
-    image: dpage/pgadmin4
-    restart: unless-stopped
-    depends_on:
-      - db
-    environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
-      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
-    volumes:
-       - odoo-pgadmin-data:/root/.pgadmin
-    ports:
-      - 5050:80/tcp
-    logging:
-      driver: json-file
-    deploy:
-      resources:
-        limits:
-          memory: 128M
-    networks:
-      odoo:
-  
 volumes:
   odoo-web-data:
   odoo-db-data:
-  odoo-pgadmin-data:
 
 networks:
   odoo:

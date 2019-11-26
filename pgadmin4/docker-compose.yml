@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: unless-stopped
+    env_file: 
+      - .env
+      - ../global.env
+    volumes:
+       - pgadmin:/root/.pgadmin
+    ports:
+      - 5050:80/tcp
+    logging:
+      driver: json-file
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    networks:
+      guacamole_guacamole:
+  
+networks:
+  guacamole_guacamole:
+    external: true
+volumes:
+  pgadmin:
