@@ -1,0 +1,37 @@
+version: '3.7'
+
+services:
+  mylar:
+    image: linuxserver/mylar:latest
+    restart: unless-stopped
+    ports:
+      - 8090:8090/tcp
+    env_file: 
+        - .env
+        - ../global.env    
+    hostname: liofal.synology.me
+    volumes:
+      - /volume1/docker/mylar/config:/config
+      - /volume1/mylar:/downloads
+      - /volume1/comics:/comics
+    logging:
+      driver: json-file
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    networks:
+      mylar:
+      jackett:
+      transmission:
+  
+networks:
+  mylar:
+    name: mylar
+  jackett:
+    external: 
+      name: jackett
+  transmission:
+    external: 
+      name: transmission
+  
