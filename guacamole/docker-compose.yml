@@ -30,7 +30,7 @@ services:
         - .env
         - ../global.env
       hostname: postgres
-      depends_on:
+      depends_on: 
         - init-guac-db
       logging:
         driver: json-file
@@ -44,6 +44,8 @@ services:
   guacd:
     image: guacamole/guacd:latest
     restart: unless-stopped
+    environment: 
+      - GUACD_LOG_LEVEL=debug
     hostname: guacd
     logging:
       driver: json-file
@@ -53,31 +55,19 @@ services:
   guac:
     image: guacamole/guacamole:latest
     restart: unless-stopped
-    
-    links: 
-      - postgres
-      - guacd
     depends_on: 
       - postgres
       - guacd
     ports:
       - "8080:8080"
-    environment:
-      GUACD_HOSTNAME: guacd
-      POSTGRES_HOSTNAME: postgres
-      POSTGRES_DATABASE: ${POSTGRES_USER:-guacadb} 
-      POSTGRES_USER: ${POSTGRES_USER:-guacadb} 
-      POSTGRES_PASSWORD:
-      LETSENCRYPT_TEST: ${LETSENCRYPT_TEST:-false}
-      VIRTUAL_HOST: 
-      LETSENCRYPT_HOST: ${VIRTUAL_HOST}
-      LETSENCRYPT_EMAIL: 
+    env_file: 
+      - .env
+      - ../global.env
     logging:
       driver: json-file
     networks:
       guacamole:
 
-  
 networks:
   guacamole:
 volumes:
