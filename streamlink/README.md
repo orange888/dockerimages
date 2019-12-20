@@ -11,6 +11,9 @@ I'm also interested with new projects for automation of daily popular tasks, don
 
 # Notes
 
+## 1.7.0 - 1.7.1
+Upgrade streamlink for support of twitch API recent changes
+
 ## 1.6.0
 Upgrade python
 Adapt recorder script to rely on upgrade version of twitch API
