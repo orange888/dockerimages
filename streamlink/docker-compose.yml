@@ -64,3 +64,15 @@ services:
     environment:
       - user=n33bl3t
       - quality=best
+
+ krip:
+   <<: *common
+   environment:
+     - user=nl_kripp
+     - quality=best
+
+ qkrfuddn0:
+   <<: *common
+   environment:
+     - user=qkrfuddn0
+     - quality=best
