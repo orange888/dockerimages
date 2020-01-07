@@ -1,5 +1,5 @@
 # Specify base image
-FROM python:3.8.0-alpine3.10 as base
+FROM python:3.8.1-alpine3.11 as base
 
 # Build dependencies in python
 FROM base as builder
