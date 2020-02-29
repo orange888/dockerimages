@@ -19,7 +19,7 @@ services:
         - .env
         - ../global.env    
         - clientid.env
-    hostname: liofal.synology.me
+    hostname: diskstation.local
     volumes:
       - /volume1/docker/plex/config:/config
       - /volume1/docker/plex/transcode:/transcode
