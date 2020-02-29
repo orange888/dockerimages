@@ -1,7 +1,7 @@
 version: '3.7'
 
 x-common: &common
-    image: liofal/streamlink:1.7.2
+    image: liofal/streamlink:1.7.3
     build:
       context: .
       dockerfile: Dockerfile
@@ -69,7 +69,13 @@ services:
    <<: *common
    environment:
      - user=nl_kripp
-     - quality=best
+     - quality=480p,720p,720p60
+
+ bebe872:
+   <<: *common
+   environment:
+     - user=bebe872
+     - quality=480p,720p,720p60
 
  qkrfuddn0:
    <<: *common
