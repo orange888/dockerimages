@@ -54,10 +54,10 @@ services:
       - user=serral
       - quality=best
 
- reynor2002:
+ rb_reynor:
     <<: *common
     environment:
-      - user=reynor2002
+      - user=rb_reynor
 
  n33bl3t:
     <<: *common
