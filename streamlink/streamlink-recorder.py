@@ -45,7 +45,7 @@ def get_from_twitch(operation):
 
     response = requests.get(
         url, 
-        headers={'Client-ID': 'jzkbprff40iqj646a697cyrvl0zt2m6'}
+        headers={'Client-ID': client_id}
     )
     if response.status_code != 200:
         raise ValueError(

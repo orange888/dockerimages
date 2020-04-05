@@ -70,6 +70,7 @@ services:
    environment:
      - user=nl_kripp
      - quality=480p,720p,720p60
+     - gamelist=138585
 
  bebe872:
    <<: *common
